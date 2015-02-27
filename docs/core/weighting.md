@@ -31,13 +31,13 @@ class BlockingWeighting implements Weighting
     @Override
     public double calcWeight( EdgeIteratorState edgeState, boolean reverse, int prevOrNextEdgeId )
     {
-        if(forbiddenEdges.contains(edge.getEdge()))
+        if(forbiddenEdges.contains(edgeState.getEdge()))
             return Double.POSITIVE_INFINITY;
 
-        double speed = reverse ? encoder.getReverseSpeed(edge.getFlags()) : encoder.getSpeed(edge.getFlags());
+        double speed = reverse ? encoder.getReverseSpeed(edgeState.getFlags()) : encoder.getSpeed(edgeState.getFlags());
         if (speed == 0)
             return Double.POSITIVE_INFINITY;
-        return edge.getDistance() / speed;
+        return edgeState.getDistance() / speed;
     }
 
     @Override
